@@ -186,7 +186,7 @@ class ImplGenerator {
         ..writeln()
         ..writeln('  /// The [ReactComponentFactory] associated with the component built by this class.')
         ..writeln('  @override')
-        ..writeln('  Function get componentFactory => $componentFactoryName;')
+        ..writeln('  Function get componentFactory => componentFactoryOverride ?? $componentFactoryName;')
         ..writeln()
         ..writeln('  /// The default namespace for the prop getters/setters generated for this class.')
         ..writeln('  @override')
