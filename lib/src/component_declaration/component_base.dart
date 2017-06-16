@@ -12,7 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+@JS()
 library over_react.component_declaration.component_base;
+
+import 'package:js/js.dart';
 
 import 'package:meta/meta.dart';
 import 'package:over_react/over_react.dart' show
@@ -291,6 +294,10 @@ const defaultTestIdKey = 'data-test-id';
 /// Used in [UiProps.modifyProps].
 typedef PropsModifier(Map props);
 
+
+@JS('eval')
+external eval(String source);
+
 /// A [dart.collection.MapView]-like class with strongly-typed getters/setters for React props that
 /// is also capable of creating React component instances.
 ///
@@ -302,6 +309,24 @@ typedef PropsModifier(Map props);
 abstract class UiProps extends Object
     with ReactPropsMixin, UbiquitousDomPropsMixin, CssClassPropsMixin
     implements PropsMapViewMixin, MapViewMixin, Map {
+
+  UiProps() {
+    // Work around https://github.com/dart-lang/sdk/issues/27647
+    eval('''
+      (function patchName(instance) {
+        var object = instance;
+        while (object = Object.getPrototypeOf(object)) {
+          var nameDescriptor = Object.getOwnPropertyDescriptor(object, 'name');
+          
+          if (nameDescriptor) {
+            Object.defineProperty(instance, 'name', nameDescriptor);
+            return;
+          }
+        } 
+      });
+    ''')(this);
+  }
+
   // Manually implement members from `MapViewMixin`,
   // since mixing that class in doesn't play well with the DDC.
   // TODO find out root cause and reduced test case.
