@@ -6,6 +6,9 @@ import 'package:over_react/over_react.dart';
 import '../src/demo_components.dart';
 
 // Parts
+part 'alert/alert-basic.dart';
+part 'alert/alert-dismissible.dart';
+
 part 'button/button-examples.dart';
 part 'button/button-types.dart';
 part 'button/button-outline.dart';

@@ -1,6 +1,7 @@
 library over_react.web.demo_components;
 
 // Imports
+import 'dart:async';
 import 'dart:html';
 import 'dart:math';
 import 'package:react/react.dart' as react;
@@ -10,6 +11,7 @@ import 'package:over_react/over_react.dart';
 // Parts
 part 'demo_components/shared.dart';
 
+part 'demo_components/alert.dart';
 part 'demo_components/button.dart';
 part 'demo_components/button_group.dart';
 part 'demo_components/list_group.dart';

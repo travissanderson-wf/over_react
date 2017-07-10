@@ -15,6 +15,9 @@ void main() {
     listGroupBasicDemo(), querySelector('$demoMountNodeSelectorPrefix--list-group'));
 
   react_dom.render(
+    alertBasicDemo(), querySelector('$demoMountNodeSelectorPrefix--alert'));
+
+  react_dom.render(
     progressBasicDemo(), querySelector('$demoMountNodeSelectorPrefix--progress'));
 
   react_dom.render(
