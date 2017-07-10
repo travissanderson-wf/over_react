@@ -31,7 +31,7 @@ import 'package:over_react/over_react.dart';
 ///
 ///     (ResizeSensor()..onResize = () => print('resized'))(children)
 ///
-/// See: <https://docs.workiva.org/web_skin_dart/latest/components/#resize-sensor>.
+/// > See: `web/examples/resize_sensor/index.dart`
 @Factory()
 UiFactory<ResizeSensorProps> ResizeSensor;
 
