@@ -323,10 +323,13 @@ abstract class AbstractTransitionComponent<T extends AbstractTransitionProps,
   }
 
   /// Method that will be called when [AbstractTransitionComponent]  first enters the `showing` state.
-  void handleShowing() {}
+  void handleShowing() {
+    getTransitionDomNode().attributes['data-transition-state'] = 'showing';
+  }
 
   /// Method that will be called when [AbstractTransitionComponent]  first enters the `hiding` state.
   void handleHiding() {
+    getTransitionDomNode().attributes['data-transition-state'] = 'hiding';
     if (_transitionNotGuaranteed) {
       // No transition will occur, so kick off the state change manually.
       //
@@ -363,6 +366,7 @@ abstract class AbstractTransitionComponent<T extends AbstractTransitionProps,
 
   /// Method that will be called when [AbstractTransitionComponent]  first enters the `shown` state.
   void handleShown() {
+    getTransitionDomNode().attributes['data-transition-state'] = 'shown';
     if (props.onDidShow != null) {
       props.onDidShow();
     }
