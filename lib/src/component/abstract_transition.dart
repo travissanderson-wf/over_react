@@ -20,6 +20,11 @@ import 'dart:html';
 import 'package:meta/meta.dart';
 import 'package:over_react/over_react.dart';
 
+const String transitionStateDomProp = 'data-transition-state';
+const String transitionStateDomValueShowing = 'showing';
+const String transitionStateDomValueShown = 'shown';
+const String transitionStateDomValueHiding = 'hiding';
+
 @AbstractProps()
 abstract class AbstractTransitionProps extends UiProps with TransitionPropsMixin {}
 
@@ -324,12 +329,18 @@ abstract class AbstractTransitionComponent<T extends AbstractTransitionProps,
 
   /// Method that will be called when [AbstractTransitionComponent]  first enters the `showing` state.
   void handleShowing() {
-    getTransitionDomNode().attributes['data-transition-state'] = 'showing';
+    var domAttributes = getTransitionDomNode()?.attributes;
+    if (domAttributes != null) {
+      domAttributes[transitionStateDomProp] = transitionStateDomValueShowing;
+    }
   }
 
   /// Method that will be called when [AbstractTransitionComponent]  first enters the `hiding` state.
   void handleHiding() {
-    getTransitionDomNode().attributes['data-transition-state'] = 'hiding';
+    var domAttributes = getTransitionDomNode()?.attributes;
+    if (domAttributes != null) {
+      domAttributes[transitionStateDomProp] = transitionStateDomValueHiding;
+    }
     if (_transitionNotGuaranteed) {
       // No transition will occur, so kick off the state change manually.
       //
@@ -366,7 +377,10 @@ abstract class AbstractTransitionComponent<T extends AbstractTransitionProps,
 
   /// Method that will be called when [AbstractTransitionComponent]  first enters the `shown` state.
   void handleShown() {
-    getTransitionDomNode().attributes['data-transition-state'] = 'shown';
+    var domAttributes = getTransitionDomNode()?.attributes;
+    if (domAttributes != null) {
+      domAttributes[transitionStateDomProp] = transitionStateDomValueShown;
+    }
     if (props.onDidShow != null) {
       props.onDidShow();
     }
